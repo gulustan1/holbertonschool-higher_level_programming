@@ -1,26 +1,26 @@
 #!/usr/bin/python3
-"""Paskal üçbucağı modulu"""
+"""
+Contains the pascal_triangle function.
+"""
 
 
 def pascal_triangle(n):
-    """n ölçülü Paskal üçbucağını qaytaran funksiya"""
+    """
+    Returns a list of lists of integers representing Pascal's triangle of n.
+    Returns an empty list if n <= 0.
+    """
     if n <= 0:
         return []
 
     triangle = [[1]]
 
-    while len(triangle) < n:
-        prev_row = triangle[-1]
-        # Yeni sətrin başlanğıcı həmişə 1-dir
-        current_row = [1]
-
-        # Aradakı elementləri hesabla
-        for i in range(len(prev_row) - 1):
-            current_row.append(prev_row[i] + prev_row[i + 1])
-
-        # Yeni sətrin sonuna 1 əlavə et
-        current_row.append(1)
-        
-        triangle.append(current_row)
+    for i in range(1, n):
+        row = [1]
+        prev_row = triangle[i - 1]
+        # Calculate the internal values of the row
+        for j in range(1, i):
+            row.append(prev_row[j - 1] + prev_row[j])
+        row.append(1)
+        triangle.append(row)
 
     return triangle
