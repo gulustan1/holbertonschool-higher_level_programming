@@ -1,9 +1,9 @@
 #!/usr/bin/python3
-"""Filtrləmə imkanı olan Student klası"""
+"""Serialization və Deserialization dəstəkləyən Student klası"""
 
 
 class Student:
-    """Tələbə məlumatlarını saxlayan və filtrləyən klas"""
+    """Tələbə məlumatlarını saxlayan, filtrləyən və bərpa edən klas"""
 
     def __init__(self, first_name, last_name, age):
         """Student instansiyasını başladır"""
@@ -21,3 +21,8 @@ class Student:
                     res[key] = self.__dict__[key]
             return res
         return self.__dict__
+
+    def reload_from_json(self, json):
+        """Lüğətdəki bütün atributları Student obyektinə yükləyir"""
+        for key, value in json.items():
+            setattr(self, key, value)
